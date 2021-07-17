@@ -6,13 +6,13 @@ var fs = require('fs');
 var privateKey = fs.readFileSync('./demos/private.key');
 
 var payload = {
-  name: 'Alice'
+  data: 'Whatever not sensitive'
 };
 
 
 var token = jwt.sign(payload, privateKey, {
     algorithm: 'RS256',
-    expiresIn: 120,
+    expiresIn: 60,
     subject: "1"
 });
 

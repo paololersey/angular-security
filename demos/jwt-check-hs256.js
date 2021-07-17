@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 
 
 // verify an existing JWT
-var existingToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWxpY2UiLCJpYXQiOjE1MDI4ODkxOTF9._tPQtlZz2GhXHXATn5W09K4XCG0Z5LyEQqikJf3qXF8';
+var existingToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWxpY2UiLCJpYXQiOjE2MjYwOTI5MDd9.cnksPgse6kQAXVqqAqXxHo4HvXbcg1LXBnWYZa5AyKc';
 
 
 var secretKey = 'secret-key';
