@@ -10,6 +10,7 @@ import {getUser} from "./get-user.route";
 import {logout} from "./logout.route";
 import {login} from "./login.route";
 import { retrieveUserIdFromRequest } from './get-user.middleware';
+import { checkIfAuthenticated } from './auth.middleware';
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -17,9 +18,9 @@ const cookieParser = require('cookie-parser');
 const app: Application = express();
 
 app.use(cookieParser());
-
-app.use(bodyParser.json());
 app.use(retrieveUserIdFromRequest);
+app.use(bodyParser.json());
+
 
 
 
@@ -34,7 +35,7 @@ const options = commandLineArgs(optionDefinitions);
 
 // REST API
 app.route('/api/lessons')
-    .get(readAllLessons);
+    .get(checkIfAuthenticated, readAllLessons);
 
 app.route('/api/signup')
     .post(createUser);

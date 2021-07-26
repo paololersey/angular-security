@@ -9,7 +9,7 @@ export function getUser(req:Request, res:Response) {
     if (user) {
         // not send to frontend all user info!
         //res.status(200).json(user);
-        res.status(200).json({email:user.email});
+        res.status(200).json({email:user.email, id: user.id});
     }
     else {
         res.sendStatus(204);
