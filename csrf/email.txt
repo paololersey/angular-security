@@ -5,7 +5,7 @@ Hello,
 
    Let's simulate a Cross Site Request Forgery (CSRF for short) Attack!
 
-   Click this link -> http://localhost:8080/csrf/csrf-page.html
+   Click this link -> http://localhost:8082/csrf/csrf-page.html
 
    This would normally send you to a domain under the attacker control,
 
