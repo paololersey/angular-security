@@ -6,6 +6,7 @@ import {Observable, BehaviorSubject} from "rxjs";
 import {User} from "../model/user";
 import * as auth0 from 'auth0-js';
 import {Router} from "@angular/router";
+import * as moment from 'moment';
 
 export const ANONYMOUS_USER: User = {
     id: undefined,
@@ -54,35 +55,46 @@ export class AuthService {
                 window.location.hash = ''; // clear the url
                 console.log("Authentication has a token", authResult )
                 this.setSession(authResult);
+                this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) =>{
+                    if(err){
+                        console.error("could get user infos", err )
+                        return;
+                    }
+                    console.log(userProfile)
+                } )
             }
             console.log(authResult)
            
-            this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) =>{
-                if(err){
-                    console.error("could get user infos", err )
-                    return;
-                }
-                console.log(userProfile)
-            } )
+            
         })
     }
 
     logout() {
-
+        localStorage.removeItem("idToken");
+        localStorage.removeItem("expiresAt");
+        this.router.navigate(['/lessons']);
     }
 
     private setSession(authResult){
+        const expiresAt = moment().add(authResult.expiresIn, 'second');
         localStorage.setItem("idToken", authResult.idToken);
+        localStorage.setItem("expiresAt", JSON.stringify(expiresAt.valueOf()));
     }
 
     public isLoggedIn() {
-        return false;
+       
+        return moment().isBefore(this.getExpiration());
     }
 
     isLoggedOut() {
         return !this.isLoggedIn();
     }
 
+    getExpiration(){
+        const expiration=  localStorage.getItem("expiresAt");
+        const expiresAt = JSON.parse(expiration);
+        return moment(expiresAt);
+    }
 }
 
 
