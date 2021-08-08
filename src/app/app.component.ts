@@ -15,7 +15,7 @@ export class AppComponent  implements OnInit {
     }
 
     ngOnInit() {
-
+        this.auth.retrieveAuth0InfoFromUrl();
     }
 
     signUp() {

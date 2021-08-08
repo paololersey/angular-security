@@ -13,8 +13,8 @@ export const ANONYMOUS_USER: User = {
 };
 
 const AUTH_CONFIG = {
-    clientID: 'hHhF4PWGY7vxLQH2HatJaUOertB1dDrU',
-    domain: "angularsecuritycourse.auth0.com"
+    clientID: 'UXJsqUbYmeogso4xylT2zXDLrsyETMuA',
+    domain: "dev-9m0grv42.us.auth0.com"
 };
 
 
@@ -37,15 +37,42 @@ export class AuthService {
     }
 
     login() {
-
+        this.auth0.authorize();
     }
 
     signUp() {
 
     }
 
+    retrieveAuth0InfoFromUrl(){
+        this.auth0.parseHash( (err, authResult) => {
+            if(err){
+                console.error("could not parse the hash", err )
+                return;
+            }
+            else if(authResult && authResult.idToken){
+                window.location.hash = ''; // clear the url
+                console.log("Authentication has a token", authResult )
+                this.setSession(authResult);
+            }
+            console.log(authResult)
+           
+            this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) =>{
+                if(err){
+                    console.error("could get user infos", err )
+                    return;
+                }
+                console.log(userProfile)
+            } )
+        })
+    }
+
     logout() {
 
+    }
+
+    private setSession(authResult){
+        localStorage.setItem("idToken", authResult.idToken);
     }
 
     public isLoggedIn() {
