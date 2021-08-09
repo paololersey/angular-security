@@ -61,6 +61,7 @@ export class AuthService {
                         return;
                     }
                     console.log(userProfile)
+                    this.router.navigate(['/lessons']);
                 } )
             }
             console.log(authResult)

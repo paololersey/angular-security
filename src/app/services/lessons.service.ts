@@ -16,7 +16,11 @@ export class LessonsService {
 
     loadAllLessons() : Observable<Lesson[]> {
         return this.http.get<any>('/api/lessons').pipe(
-            map(res => res.lessons));
+            map(res => 
+                res.lessons,
+                err => 
+                console.error(err)
+            ));
     }
 
     findLessonById(id:number) {
