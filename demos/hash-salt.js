@@ -3,7 +3,7 @@
 var crypto = require('crypto');
 
 
-var password = "monkey";
+var password = "bq7/65@'JxD;2CeS";
 
 
 crypto.randomBytes(256, function(err, salt) {
