@@ -4,17 +4,14 @@ var crypto = require('crypto');
 
 
 var password = "bq7/65@'JxD;2CeS";
+var userSalt = '103459035';
+
+crypto.pbkdf2(password, userSalt, 100000, 512, 'sha3-512',
+    function(err, hash) {
+
+        console.log("The result of hashing " + password + " is:\n\n" +
+            hash.toString('hex') + "\n\n");
+
+    });
 
 
-crypto.randomBytes(256, function(err, salt) {
-
-    crypto.pbkdf2(password, salt, 100000, 512, 'sha256',
-        function(err, hash) {
-
-            console.log("The result of hashing " + password + " is:\n\n" +
-                hash.toString('hex') + "\n\n");
-
-        });
-
-
-});

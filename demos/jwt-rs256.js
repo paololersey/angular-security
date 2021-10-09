@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 var fs = require('fs');
 
 
-var privateKey = fs.readFileSync('./demos/private.key');
+var privateKey = fs.readFileSync('./private.key');
 
 var payload = {
   data: 'Whatever not sensitive'
